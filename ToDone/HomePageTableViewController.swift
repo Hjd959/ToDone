@@ -11,9 +11,16 @@ import UIKit
 class HomePageTableViewController: UITableViewController {
 
     var ItemArray = ["A1","A2","A3","🆔"]
+    
+    // هذا الامر عشان يحفظ لك اخر شي وقفت عليه
+    let defultes = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // برضو هذا الامر عشان يعرض لك التعديلات ويحفظ اخر شي سو المستخدم 
+        if let items = defultes.array(forKey: "ToDoListArray") as? [String]{
+            ItemArray = items
+        }
 
      
     }
@@ -90,6 +97,9 @@ class HomePageTableViewController: UITableViewController {
                 // اذا حط قيمة فارغه حوله لي الى النص المكتوب مسبقاً
                 self.ItemArray.append(textFieldForNill)
             }
+            
+            // عشان يحفظ لك اخر شي وقفت عليه
+            self.defultes.set(self.ItemArray, forKey: "ToDoListArray")
             print(textField.text!)
             self.tableView.reloadData()
         
