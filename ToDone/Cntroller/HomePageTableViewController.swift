@@ -9,30 +9,23 @@
 import UIKit
 import CoreData
 
+
+
 @available(iOS 13.0, *)
 class HomePageTableViewController: UITableViewController{
     
-    var ItemArray = [Item]() //["A1","A2","A3","🆔","alhalal","abdulwahab","alenezi","a","b","c","d","e","f","g","h","r","j","l","m","o","x","z"]
-    //
-    
-    
+    var ItemArray = [Item]()
     var selectedCategory : Category? {
         
         didSet{
             loadItems()
         }
     }
-    
-    
-    
+
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     //.first?.appendingPathComponent("Itrms.plist")
-    
-    
-    
-    // هذا الامر عشان يحفظ لك اخر شي وقفت عليه
+       // هذا الامر عشان يحفظ لك اخر شي وقفت عليه
     let defultes = UserDefaults.standard
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,16 +34,10 @@ class HomePageTableViewController: UITableViewController{
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         //        // برضو هذا الامر عشان يعرض لك التعديلات ويحفظ اخر شي سو المستخدم
-        
-        
-      
+
         loadItems()
-        
-        
-        
     }
-    
-    
+
     // MARK: - Table view data source
     
     
@@ -175,10 +162,6 @@ class HomePageTableViewController: UITableViewController{
         }else {
             request.predicate = categoryPredicate
         }
-        
-//        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, predicate])
-//
-//        request.predicate = compoundPredicate
         do {
             ItemArray =  try context.fetch(request)
         }catch {
